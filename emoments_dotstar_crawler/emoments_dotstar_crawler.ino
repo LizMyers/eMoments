@@ -216,7 +216,7 @@ void loop() {
   matrix.setCursor(x, 5);
   msgStr2 = "";
 
-     for (int i = 0; i < MAX_LEN; i++) { //make sure the word finishes as --x has a limit
+     for (int i = 0; i < msgString.length(); i++) { 
         
         char c = '6';
 
