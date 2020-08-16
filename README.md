@@ -14,6 +14,6 @@ descriptioin
 
 
 ### DotStar Crawler
-<img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_dotstar_crawler/dotstar.PNG" width = "80%" height="auto" alt="photo of dot star crawler" />
+<img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_dotstar_crawler/dotstar.PNG" width = "40%" height="auto" alt="photo of dot star crawler" />
 
 description
