@@ -1,19 +1,20 @@
 ### eMoments
-DISCLAIMER: if you're not an FTE at G. - this project will not work. It requires a BlueTooth connection to an authenticated machine.
+DISCLAIMER: This project requires a BlueTooth connection to an authenticated machine at G. (i.e. only FTEs at G. have access)
 
 ### Description
-eMoments allows employees to voice their opinion about common topics. For example, after an #allhands meeting, employees may want to voice an opinion about what was just discussed. They can write a few words of text (think shorter Tweets) and select one of 5 colors to express their mood. There's an internal web page which displays each eMoment as a block of color with the text inside and any hashtags assigned. In sum, eMoments gives management greater visibility into the reaction to their initiatives - whilst protecting employees anonymity and right to free speech.
+eMoments is a 20% project which allows FTEs to voice their opinion about common topics. For example, after an #allhands meeting, attendees can write a few words of text (think shorter Tweets) and select one of 5 colors to express their mood. There's an internal web page which displays each entry as a block of color with text and any hashtags assigned. In sum, eMoments gives audience memebers a voice and business leaders immediate feedback about their initiatives.
 
-### Why This Project
-In order to accelerate awareness and adoption the eMoments team is currently running an internal contest. They are looking for the most creative/clever implementations on IoT devices. The projects below are Liz's entries in the competition.
+### How is IoT Related
+In order to accelerate awareness and adoption of eMoments, the team is currently running an internal contest. They are looking for the best IoT implementations. The implementations below are Lizs contest entries.
 
 ### NeoTrellis Grid
+###### 406 lines of code
 <img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_arduino_neotrellis.ino/neotrellis.jpg" width="40%" height = "auto" alt = "photo of neo trellis" />
 
-descriptioin
-
+The idea for this implementation came from an earlier project: <a href="https://learn.adafruit.com/neotrellis-soundboard/">Neotrellis Sound Board</a>. The NeoTrellis works well because each of the 16 LEDs is invidividually addressable and can be assigned independent actions on button press. In this design, each LED represenents a unique eMoment. Additionally, pushing any of the buttons in columns 1-4, maps to one of the four patterns (included in the starter sketch):Render by Color, Render by Time, Render by One Color, Render Randomly.
 
 ### DotStar Crawler
 <img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_dotstar_crawler/dotstar.PNG" width = "40%" height="auto" alt="photo of dot star crawler" />
 
-description
+The DotStar Matrix provides a 6 x 12 grid or 72 individually addressable pixels. However, assigning each pixel an eMoment -
+the display proved too dense and was fatiguing for the eyes to focus and look at for any length of time. So Liz came up with a better plan. This little matrix is much better at displaying simple icons and text. So Liz decided build the word Google out of eMoments data and scroll the multi-colored text across the screen.
