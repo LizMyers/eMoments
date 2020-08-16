@@ -1,15 +1,15 @@
 
 //Sketch by LizMyers@
-//Last updated: Aug 9, 2020
+//Last updated: Aug 16, 2020
 
 //What it does: 
-// 1. Scrolls "Goooogle!". Colors match those in colorString.
-// 2. Single tap changes letters to single color
-// 3. Double tap restores to ordering color by time created
+// 1. Scrolls "Gooooooooogle!". Number of "o"s & colors come from eMoments data
+// 2. Single Tap toggles btw "render by time" and "render all one color" patterns
+// 3. Extend project by using accelerometer data to change patterns
 //
-//    IDEA: Return tags: So we can show the related topic.
+//    REQUESTED FEATURE: Return tags: So we can show the related topic.
 //    Example: "#gtech" -> "Gooooooooogle!" 
-
+//
 // Hardare:
 // a) Adafruit Huzzah Feather ESP32 (BT + WiFi)
 // b) Adafruit DotStar Feather Wing (12 x 6)
@@ -122,7 +122,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
 
       colorString = value;
       
-     //dotstar width limit: keep max number of "o"s under 25 so we can finish word on screen
+     //dotstar width limit: keep max number of "o"s under 20 so we can finish word on screen
 
      if (colorString.length() > 20) {
           for(int i = 0; i < 20; i++) {
@@ -140,7 +140,7 @@ class MyCallbacks: public BLECharacteristicCallbacks {
 
       Serial.print("msgStringLength: ");
       Serial.println(msgString.length()); 
-
+      //controls rollover/blank space btw iterations
       yardstick = ((msgString.length() + 62) * -1);
       Serial.print("yardstick: ");
       Serial.println(yardstick); 
@@ -280,16 +280,6 @@ void loop() {
       return;
     }
   
-//  if (click && ("19" || "12" || "1A")) {
-//    singleTap = true; 
-//    Serial.println("Single Tap");
-//  } else if (click && ("61" || "62" || "69")) {
-//    singleTap = false;
-//    Serial.println("Double Tap");
-//  }
-
   delay(1000);
-  //return;
   
-  
-} // MAIN LOOP
+}
