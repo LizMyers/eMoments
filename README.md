@@ -8,12 +8,12 @@ eMoments allows employees to voice their opinion about common topics. For exampl
 In order to accelerate awareness and adoption the eMoments team is currently running an internal contest. They are looking for the most creative/clever implementations on IoT devices. The projects below are Liz's entries in the competition.
 
 ### NeoTrellis Grid
-[PHOTO]
+<img src = "" alt = "photo of neo trellis" />
 
 descriptioin
 
 
 ### DotStar Crawler
-[PHOTO]
+<img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_dotstar_crawler/dotstar.PNG" alt="photo of dot star crawler" />
 
 description
