@@ -5,14 +5,12 @@ eMoments is a 20% project which allows FTEs to voice their opinion about common 
 
 ## Hackathon Competition
 Currently the eMoments (20%) team are running an internal contest. The idea is to socialize the project and get the data out of our screens and onto our desktops to heighten awareness. Below are Lizs contest entries.
-
-
+<br><br>
 ### NeoTrellis Grid
 <img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_arduino_neotrellis.ino/neotrellis.jpg" width="40%" height="auto" alt = "photo of neo trellis" />
 
 The idea for this implementation came from an earlier project: <a href="https://learn.adafruit.com/neotrellis-soundboard/"> Neotrellis Sound Board</a>. The NeoTrellis works well because each of the 16 LEDs is invidividually addressable and can be assigned independent actions on button press. In this design, each LED represents a unique eMoment. **By pushing the button in one of the four columns, users can change the display** according to 1 of 4 pre-built patterns: Render by Color, Render by Time, Render by One Color, Render Randomly.
-
-
+<br><br>
 ### DotStar Crawler
 <img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_dotstar_crawler/dotstar.PNG" width = "40%" height="auto" alt="photo of dot star crawler" />
 
