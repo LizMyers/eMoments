@@ -1,32 +1,18 @@
-/**
-eMoments Implmentation by Liz Myers (@lizmyers)
-August 3, 2020
 
-HARDWARE
-1. Adafruit NeoTrellis 4x4 Grid
-2. Adafruit Huzzah Feather Esp32 (BlueTooth & WiFi)
-3. Adafruit Propmaker Feather Wing (using accelerometer to change modes randomly)
-4. LED Button (To Reset to Default mode)
-5. RESET Button (Destart script)
-6. Power Switch
+// Sketch by LizMyers@
+// Last updated: Aug 16, 2020
+//
+// HARDWARE
+// 1. Adafruit Huzzah Feather Esp32 (BlueTooth & WiFi)
+// 2. Adafruit NeoTrellis 4x4 Grid
+// 3. RESET Button (Restart script)
+// 4. Power Switch
+// 5. Lipo rechareable battery
+// 6. Case: https://www.thingiverse.com/thing:3750704
 
-REFERENCE
-7. How to Setup Propmaker on Arduino
-https://learn.adafruit.com/adafruit-prop-maker-featherwing/arduino-code
+// Assembled from parts left over from this project: https://learn.adafruit.com/neotrellis-soundboard/
 
-8. 3D Print on ThingiVerse (download STLs)
-https://www.thingiverse.com/thing:3750704
-
-9. CONCEPT 192
-Link to larger installation and art piece goes here
-
- */
- 
 #include "Adafruit_NeoTrellis.h" // Adafruit NeoTrellis 4x4 Grid
-
-#include <Adafruit_LIS3DH.h> // propmaker feather wing / accelerometer
-#include <Adafruit_Sensor.h> // propmaker feather wing / accelerometer
-
 #include <BLEDevice.h>
 #include <BLEServer.h>
 
@@ -87,13 +73,10 @@ String colorString = "";
 //instantiate trellis 
 Adafruit_NeoTrellis trellis;
 
-//instantiate i2c accelerometer
-Adafruit_LIS3DH lis = Adafruit_LIS3DH();
-
 //define a callback for key presses
 TrellisCallback blink(keyEvent evt){
   
-  // Check is the pad pressed? Change display mode by pushing btns in cols 0 - 3
+  // Check is the pad pressed? Change display mode by pushing btns in columns 0 - 3
   if (evt.bit.EDGE == SEESAW_KEYPAD_EDGE_RISING) {
     if (evt.bit.NUM == 0 || evt.bit.NUM == 4 || evt.bit.NUM == 8 || evt.bit.NUM == 12) {
         sortByColor = true;
@@ -169,7 +152,6 @@ void setup() {
 
   // initing serial port
   Serial.begin(115200);
-  Serial.println("\nProp-Maker Wing: Accelerometer");
 
   // set up the switch
   pinMode(SWITCH_PIN, INPUT_PULLUP);
@@ -238,10 +220,6 @@ void loop() {
   // Listen for a switch event
   if (!digitalRead(SWITCH_PIN)) {
     Serial.println("Switch pressed!");
-    
-//    int colorMode = (random(0, 3));
-//    Serial.print("colorMode: ");
-//    Serial.print(colorMode);
   }
   
   trellis.read();
@@ -251,7 +229,6 @@ void loop() {
   delay(2000);
 
 }
-
 
 //*************************** Start LED rendering ********************************
 
@@ -368,12 +345,12 @@ void renderOneColor() {
     for (uint16_t i=0; i<trellis.pixels.numPixels(); i++) {
 
   for (int i = 0; i < NUM_LEDS; i++) {
-    if (c == '0') trellis.pixels.setPixelColor(i,0xCC0000);//red
-      else if (c == '1') trellis.pixels.setPixelColor(i,0xB34700);//orange
-      else if (c == '2') trellis.pixels.setPixelColor(i,0x002DFF);//blue
-      else if (c == '3') trellis.pixels.setPixelColor(i,0xCCE100);//yellowGreen
-      else if (c == '4') trellis.pixels.setPixelColor(i,0x00CC00);//green
-      else trellis.pixels.setPixelColor(i,0x002DFF);//blue
+    if (c == '0') trellis.pixels.setPixelColor(i,0xCC0000);        // red
+      else if (c == '1') trellis.pixels.setPixelColor(i,0xB34700); // orange
+      else if (c == '2') trellis.pixels.setPixelColor(i,0x002DFF); // blue
+      else if (c == '3') trellis.pixels.setPixelColor(i,0xCCE100); // yellowGreen
+      else if (c == '4') trellis.pixels.setPixelColor(i,0x00CC00); // green
+      else trellis.pixels.setPixelColor(i,0x002DFF);               // blue
   }
 
  }
@@ -401,11 +378,11 @@ void shuffleColorString()
 
 int renderColorRange(int index, int count, char x) {
   for (int i = 0; i < count; i++, index++) {
-    if (x == '0') trellis.pixels.setPixelColor(i,0xCC0000);//red
-      else if (x == '1') trellis.pixels.setPixelColor(index,0xB34700);//orange
-      else if (x == '2') trellis.pixels.setPixelColor(index,0x002DFF);//blue
-      else if (x == '3') trellis.pixels.setPixelColor(index,0xCCE100);//yellowGreen
-      else if (x == '4') trellis.pixels.setPixelColor(index,0x00CC00);//green
+    if (x == '0') trellis.pixels.setPixelColor(i,0xCC0000);            // red
+      else if (x == '1') trellis.pixels.setPixelColor(index,0xB34700); // orange
+      else if (x == '2') trellis.pixels.setPixelColor(index,0x002DFF); // blue
+      else if (x == '3') trellis.pixels.setPixelColor(index,0xCCE100); // yellowGreen
+      else if (x == '4') trellis.pixels.setPixelColor(index,0x00CC00); // green
   }
   return index;
 }
