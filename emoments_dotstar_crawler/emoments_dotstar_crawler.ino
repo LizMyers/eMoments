@@ -54,7 +54,6 @@
   #define CLOCKPIN   13
 #endif
 
-#define MAX_LEN 10
 #define SHIFTDELAY 120
 #define BRIGHTNESS 20
 
@@ -87,6 +86,7 @@ String msgString = "eMoments!"; //initial msg shows we are up and running
 String msgStr1 = "";
 String msgStr2 = "";
 String msgStr3 = "";
+int MAX_LEN = 10; // used to fit msg within DotStar width limit
 
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
@@ -99,15 +99,13 @@ class MyServerCallbacks : public BLEServerCallbacks {
   void onConnect(BLEServer* pServer) {
     bluetoothConnected = true;
     Serial.println("BT CONNECTED <<< :-) ");
-    Serial.print("Here is the colorString: ");
-    Serial.println(colorString);
     delay(20);
   };
 
   void onDisconnect(BLEServer* pServer) {
     bluetoothConnected = false;
     colorString = "";
-    //msgString = "";
+    msgString = "";
     Serial.println("BT DISCONNECTED! <<< :-( ");
   }
 };
@@ -115,6 +113,7 @@ class MyServerCallbacks : public BLEServerCallbacks {
 class MyCallbacks: public BLECharacteristicCallbacks {
     void onWrite(BLECharacteristic *pCharacteristic) {
       String value = pCharacteristic->getValue().c_str();
+      Serial.println("");
       Serial.println("Obtained colors from bluetooth:");
       Serial.println(value);
 
@@ -122,11 +121,19 @@ class MyCallbacks: public BLECharacteristicCallbacks {
       Serial.println(value.length());
 
       colorString = value;
-
-      for(int i = 0; i < (colorString.length() - 5); i++) {
-        msgStr2.concat("o");
-      }
       
+     //dotstar width limit: keep max number of "o"s under 25 so we can finish word on screen
+
+     if (colorString.length() > 20) {
+          for(int i = 0; i < 20; i++) {
+            msgStr2.concat("o");
+          }
+      } else {
+          for(int i = 0; i < (colorString.length() - 5); i++) {
+            msgStr2.concat("o");
+          }
+      }
+    
       msgString = ("G" + msgStr2 +"gle! ");
       Serial.print("msgString: ");
       Serial.println(msgString); 
@@ -134,12 +141,12 @@ class MyCallbacks: public BLECharacteristicCallbacks {
       Serial.print("msgStringLength: ");
       Serial.println(msgString.length()); 
 
-      yardstick = ((msgString.length() + 60) * -1);
+      yardstick = ((msgString.length() + 62) * -1);
       Serial.print("yardstick: ");
       Serial.println(yardstick); 
 
-      Serial.print("singletap: ");
-      Serial.println(singleTap);
+      delay(1000);
+
     }
 };
 
@@ -156,12 +163,12 @@ void setup() {
     Serial.println("Couldnt start");
     while (1) yield();
   }
-  Serial.println("LIS3DH found!");
+  //Serial.println("LIS3DH found!");
 
   lis.setRange(LIS3DH_RANGE_2_G);   // 2, 4, 8 or 16 G!
   
-  Serial.print("Range = "); Serial.print(2 << lis.getRange());  
-  Serial.println("G");
+  //Serial.print("Range = "); Serial.print(2 << lis.getRange());  
+  //Serial.println("G");
 
   // 0 = turn off click detection & interrupt
   // 1 = single click only interrupt output
@@ -222,32 +229,26 @@ void loop() {
 
         if(singleTap) { //singleTap = display single color or most recent
           if(colorString.length() > 0) c = colorString.charAt(0);
-                  
-          //Serial.println(c);
           
           if (c == '0') matrix.setTextColor(colorArray[0]);      // red
           else if (c == '1') matrix.setTextColor(colorArray[1]); // orange
           else if (c == '2') matrix.setTextColor(colorArray[2]); // blue
           else if (c == '3') matrix.setTextColor(colorArray[3]); // yellowGreen
           else if (c == '4') matrix.setTextColor(colorArray[4]); // green
-          else matrix.setTextColor(colorArray[5]); //purple
+          else matrix.setTextColor(colorArray[5]);               // purple
   
           // write the letter
           matrix.print(msgString[i]);
         } else { 
           
           if(colorString.length() > 0) c = colorString.charAt(i);
-
-            singleTap = false;
-        
-          //Serial.println(c);
         
           if (c == '0') matrix.setTextColor(colorArray[0]);      // red
           else if (c == '1') matrix.setTextColor(colorArray[1]); // orange
           else if (c == '2') matrix.setTextColor(colorArray[2]); // blue
           else if (c == '3') matrix.setTextColor(colorArray[3]); // yellowGreen
           else if (c == '4') matrix.setTextColor(colorArray[4]); // green
-          else matrix.setTextColor(colorArray[5]); //purple
+          else matrix.setTextColor(colorArray[5]);               // purple
   
           // write the letter
           matrix.print(msgString[i]);
@@ -267,22 +268,28 @@ void loop() {
   uint8_t click = lis.getClick();
   if (click == 0) return;
   if (! (click & 0x30)) return;
-  Serial.print("Click detected (0x"); Serial.print(click, HEX); Serial.print("): ");
+  Serial.print("Click detected (0x"); Serial.print(click, HEX); Serial.println("): ");
+
+  //toggle btw all one color and render by time
   
-  if (click && ("0x19" || "0x12" || "0x1A")) {
-    singleTap = true; 
-    return;
-  }
+    if (click && singleTap == 1) {
+      singleTap = false;
+      return;
+    } else {
+      singleTap = true;
+      return;
+    }
+  
+//  if (click && ("19" || "12" || "1A")) {
+//    singleTap = true; 
+//    Serial.println("Single Tap");
+//  } else if (click && ("61" || "62" || "69")) {
+//    singleTap = false;
+//    Serial.println("Double Tap");
+//  }
 
-  if (click && ("0x62" || "0x69")) {
-    singleTap = false;
-    return;
-  }
- 
-  Serial.println();
-
-  delay(100);
-  return;
+  delay(1000);
+  //return;
   
   
 } // MAIN LOOP

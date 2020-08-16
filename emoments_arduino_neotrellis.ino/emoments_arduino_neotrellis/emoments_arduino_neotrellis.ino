@@ -173,18 +173,7 @@ void setup() {
 
   // set up the switch
   pinMode(SWITCH_PIN, INPUT_PULLUP);
-  Serial.println("Setup LED Button...");
- 
-  Serial.println("Starting LIS3DH...");
-  if (! lis.begin(0x18)) {   // change this to 0x19 for alternative i2c address
-    Serial.println("Couldnt start LIS3DH");
-    while (1);
-  }
-  Serial.println("LIS3DH Started!");
- 
-  // Set Accelerometer Range (2, 4, 8, or 16 G!)
-  lis.setRange(LIS3DH_RANGE_4_G);
-  
+
   trellis.begin();
   trellis.pixels.setBrightness(90);
   delay(2000);
@@ -261,24 +250,6 @@ void loop() {
   showColorsFromString(colorString);
   delay(2000);
 
-// Get a new accel. sensor event
-  sensors_event_t event; 
-  lis.getEvent(&event);
-
-  Serial.print("Accel. event: ");
-  Serial.println(&event);
-  Serial.println("");
-  delay(2000);
-
-  /* Display the results (acceleration is measured in m/s^2) */
-//  Serial.print("\t\tX: "); Serial.print(event.acceleration.x);
-//  Serial.print(" \tY: "); Serial.print(event.acceleration.y); 
-//  Serial.print(" \tZ: "); Serial.print(event.acceleration.z); 
-//  Serial.println(" m/s^2 ");
-//  Serial.println();
-//  delay(500);
-  
-
 }
 
 
@@ -292,6 +263,7 @@ LedRenderPatterns ledRenderPatterns = { renderByColor, renderByTime, renderRando
 void showColorsFromString(String colorString) {
   Serial.print("Showing colors: ");
   Serial.println(colorString);
+  Serial.println("");
 
 // Switch Patterns
   if (colorString.length() > 0) { 
