@@ -16,6 +16,6 @@ The idea for this implementation came from an earlier project: <a href="https://
 <img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_dotstar_crawler/dotstar.PNG" width = "40%" height="auto" alt="photo of dot star crawler" />
 The DotStar Matrix provides a 6 x 12 grid or 72 individually addressable pixels. However, assigning each pixel an individual eMoment proved too dense and fatigued the eyes very quickly. (This little matrix is better at displaying very simple graphics or text). So Liz came up with a better plan. She decided to build the word Goooooooooooooogle out of eMoments data and scroll the multi-colored text across the screen. <br />
 <br />
-To add a bit of interactivity, Liz added an accelerometer too. **A single tap on the case toggles between 2 display modes**:  Render by Time and Render by One Color (the most recent eMoment or the first char in colorString.)<b r/>
+To add a bit of interactivity, Liz added an accelerometer too. **A single tap on the case toggles between 2 display modes**:  Render by Time and Render by One Color (the most recent eMoment or the first char in colorString.)<br/>
 <br />
 [LM TO-DO: Add 3D printed case and swap photos here]
