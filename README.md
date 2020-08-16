@@ -17,4 +17,5 @@ The DotStar Matrix provides a 6 x 12 grid or 72 individually addressable pixels.
 
 To add a bit of interactivity, there's an accelerometer inside. **A single tap on the case toggles between 2 diplay modes: Render by Time and Render by One Color** (the most recent eMoment color or the first one in the raw colorString coming from the server.)
 
-TO-DO: Add 3D printed case and swap photos here ^
+<br>
+[LM TO-DO: Add 3D printed case and swap photos here]
