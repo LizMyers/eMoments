@@ -1,7 +1,6 @@
 # eMoments
-DISCLAIMER: This project **requires** a BlueTooth connection to an **authenticated machine at G.** (i.e. only FTEs at G. have access)
 
-eMoments is a 20% project which allows FTEs to voice their opinion about common topics. For example, after an #allhands meeting, attendees can write a few words of text (think shorter Tweets) and select one of 5 colors to express their mood. An internal web page displays each entry as a block of color with text and any hash tags assigned. In sum, eMoments gives both audience members a voice, and business leaders immediate feedback about their initiatives.
+eMoments is a 20% project(at G.) which allows FTEs to voice their opinion about common topics. For example, after an #allhands meeting, attendees can write a few words of text (think shorter Tweets) and select one of 5 colors to express their mood. An internal web page displays each entry as a block of color with text and any hash tags assigned. In sum, eMoments gives both audience members a voice, and business leaders immediate feedback about their initiatives.
 
 ## Hackathon Competition
 Currently the eMoments (20%) team are running an internal contest. The idea is to socialize the project and get the data out of our screens and onto our desktops to heighten awareness. Below are Lizs contest entries.
