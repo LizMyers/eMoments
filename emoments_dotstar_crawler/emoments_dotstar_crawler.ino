@@ -86,7 +86,7 @@ String msgString = "eMoments!"; //initial msg shows we are up and running
 String msgStr1 = "";
 String msgStr2 = "";
 String msgStr3 = "";
-int MAX_LEN = 10; // used to fit msg within DotStar width limit
+String dataMsg = "== not enough data == ";
 
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
@@ -98,15 +98,17 @@ bool singleTap = false;// render one color
 class MyServerCallbacks : public BLEServerCallbacks {
   void onConnect(BLEServer* pServer) {
     bluetoothConnected = true;
-    Serial.println("BT CONNECTED <<< :-) ");
+    msgString = "******";
+    Serial.println("BT Connecting <<< :-) ");
     delay(20);
   };
 
   void onDisconnect(BLEServer* pServer) {
     bluetoothConnected = false;
     colorString = "";
-    msgString = "";
+    msgString = "<=||=||=||=||=||=";
     Serial.println("BT DISCONNECTED! <<< :-( ");
+    delay(20);
   }
 };
 
@@ -128,18 +130,23 @@ class MyCallbacks: public BLECharacteristicCallbacks {
           for(int i = 0; i < 20; i++) {
             msgStr2.concat("o");
           }
-      } else {
+          msgString = ("G" + msgStr2 +"gle! ");
+      } else if (colorString.length() >=7) { // 7 chars = just enough to write "Google!"
           for(int i = 0; i < (colorString.length() - 5); i++) {
             msgStr2.concat("o");
           }
+          msgString = ("G" + msgStr2 +"gle! ");
+      } else { //we do not have enough data to build the string
+        msgString = dataMsg;
       }
     
-      msgString = ("G" + msgStr2 +"gle! ");
+      //msgString = ("G" + msgStr2 +"gle! ");
       Serial.print("msgString: ");
       Serial.println(msgString); 
 
       Serial.print("msgStringLength: ");
-      Serial.println(msgString.length()); 
+      Serial.println(msgString.length());
+       
       //controls rollover/blank space btw iterations
       yardstick = ((msgString.length() + 62) * -1);
       Serial.print("yardstick: ");
@@ -189,7 +196,7 @@ void setup() {
   }
   
    // init bluetooth stuff
-  BLEDevice::init("Lizs DotStar");
+  BLEDevice::init("eMoments-DotStar");
   BLEServer *pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
   BLEService *pService = pServer->createService(SERVICE_UUID);
@@ -228,7 +235,12 @@ void loop() {
         char c = '6';
 
         if(singleTap) { //singleTap = display single color or most recent
-          if(colorString.length() > 0) c = colorString.charAt(0);
+            
+          if(colorString.length() > 6) { 
+            c = colorString.charAt(0);
+          } else if (colorString.length() > 0) {
+            matrix.setTextColor(colorArray[5]); 
+          }
           
           if (c == '0') matrix.setTextColor(colorArray[0]);      // red
           else if (c == '1') matrix.setTextColor(colorArray[1]); // orange
@@ -239,9 +251,14 @@ void loop() {
   
           // write the letter
           matrix.print(msgString[i]);
-        } else { 
           
-          if(colorString.length() > 0) c = colorString.charAt(i);
+         } else { //no taps
+          
+          if(colorString.length() > 6) { 
+            c = colorString.charAt(i);
+          } else if (colorString.length() > 0) {
+            matrix.setTextColor(colorArray[5]); 
+          }
         
           if (c == '0') matrix.setTextColor(colorArray[0]);      // red
           else if (c == '1') matrix.setTextColor(colorArray[1]); // orange
@@ -253,7 +270,7 @@ void loop() {
           // write the letter
           matrix.print(msgString[i]);
 
-        } // end conditional
+        } // end if singleTap
      
       }//end for loop
 

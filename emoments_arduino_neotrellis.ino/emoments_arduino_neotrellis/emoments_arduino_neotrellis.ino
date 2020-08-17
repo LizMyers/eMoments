@@ -16,7 +16,7 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
 
-// ********************* These ones need to be adapted to your build *******************
+// ********************* These need to be adapted to your build *******************
 
 // How many leds in your strip?
 #define NUM_LEDS 16
@@ -193,7 +193,7 @@ void setup() {
   }
 
   // init bluetooth stuff
-  BLEDevice::init("InclusionMomentsDevice");
+  BLEDevice::init("eMoments-NeoTrellis");
   BLEServer *pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
   BLEService *pService = pServer->createService(SERVICE_UUID);
