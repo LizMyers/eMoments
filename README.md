@@ -3,7 +3,7 @@
 eMoments is a 20% project (at G.) which allows FTEs to voice their opinion about common topics. For example, after an #allhands meeting, attendees can write a few words of text (think shorter Tweets) and select one of 5 colors to express their mood. An internal web page displays each entry as a block of color with text and any hash tags assigned. In sum, eMoments gives both audience members a voice, and business leaders immediate feedback about their initiatives.
 
 ## Hackathon Competition
-Currently the eMoments (20%) team are running an internal contest. The idea is to socialize the project and get the data out of our screens and onto our desktops to heighten awareness. Below are Lizs contest entries.
+Currently there is an internal contest to see who can come up with the best IoT implementations. The idea is to socialize the project and get the data out of our screens and onto our desktops to heighten awareness. Below are Lizs contest entries.
 <br><br>
 ### NeoTrellis Grid
 <img src = "https://github.com/LizMyers/eMoments/blob/master/emoments_arduino_neotrellis.ino/neotrellis.jpg" width="40%" height="auto" alt = "photo of neo trellis" />
