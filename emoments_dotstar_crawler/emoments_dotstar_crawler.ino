@@ -10,10 +10,10 @@
 //    REQUESTED FEATURE: Return tags: So we can show the related topic.
 //    Example: "#gtech" -> "Gooooooooogle!" 
 //
-// Hardare:
+// Hardware:
 // a) Adafruit Huzzah Feather ESP32 (BT + WiFi)
 // b) Adafruit DotStar Feather Wing (12 x 6)
-// c) Adarfuit LIS3DH Accelerometer (accepts single/double tap)
+// c) Adafruit LIS3DH Accelerometer (accepts single/double tap)
 
 //for LIS3DH sensor
 #include <Wire.h>
